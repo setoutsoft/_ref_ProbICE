@@ -76,7 +76,7 @@ void IceProber::Login(const std::string &server,
     port_allocator_->set_flags(cricket::PORTALLOCATOR_DISABLE_TCP 
                               + cricket::PORTALLOCATOR_DISABLE_RELAY);
 
-    peer_ =  new Peer(server, 1979, my_name_, signal_thread_);
+    peer_ =  new Peer(server, port, my_name_, signal_thread_);
     peer_->SignalOnline.connect(this, &IceProber::onOnLine);
     peer_->SignalOffline.connect(this, &IceProber::onOffline);
     peer_->SignalRemoteLogin.connect(this, &IceProber::onRemoteLogin);
@@ -182,7 +182,6 @@ void IceProber::onOnLine(bool isOk) {
 }
 
 void IceProber::onOffline() {
-    //std::cout << "* Exception * Disconnected from server!" << std::endl;
     SignalPrintString("* Exception * Disconnected from server!");
 
     //exit(-1);

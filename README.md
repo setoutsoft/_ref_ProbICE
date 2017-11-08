@@ -28,7 +28,7 @@ the issue of blocking p2p.
   There is simple session based chat server developed by Node.js
 <pre>
     #cd dialog_server
-    #node inde.js
+    #node index.js
 </pre>
 
 * run in two peers

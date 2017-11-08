@@ -117,9 +117,10 @@ PeerServer.onData = function(peer, d) {
 
 // create the server
 var net = require("net");
+var port = 50001;
 net.createServer(function(sock) {
+    console.log('createServer on port:'+port);
     var peer = PeerServer.onAccept(sock);
-
     sock.addListener("connect", function(){
         PeerServer.onConnected(peer);
     });
@@ -132,6 +133,6 @@ net.createServer(function(sock) {
         PeerServer.onData(peer, d);
     });
 
-}).listen(1979);        
+}).listen(port);        
 
 

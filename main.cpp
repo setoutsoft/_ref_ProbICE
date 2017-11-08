@@ -43,13 +43,14 @@ int main(int argc, char *argv[]) {
     talk_base::LogMessage::LogTimestamps();
     talk_base::LogMessage::LogThreads();
 
-    if ( argc < 4) {
-        std::cout << "usage: IceProbe server local_name  remote_name  [logfile, default is pplog.txt]" << std::endl;
+    if ( argc < 5) {
+        std::cout << "usage: IceProbe server port local_name  remote_name  [logfile, default is pplog.txt]" << std::endl;
+		return -1;
     }
     
     IceProber *pProber ;
-    if ( argc == 5)  {
-        pProber = new IceProber(argv[4]);
+    if ( argc == 6)  {
+        pProber = new IceProber(argv[5]);
     } else {
         pProber = new IceProber();
     }
@@ -58,7 +59,7 @@ int main(int argc, char *argv[]) {
     pProber->SignalPrintString.connect( &myConsole, &SimpleConsole::OnPrintString);
     pProber->SignalExit.connect( &myConsole, &SimpleConsole::OnExit);
 
-    pProber->Login(argv[1], 1979, argv[2], argv[3]);
+    pProber->Login(argv[1], atoi(argv[2]), argv[3],argv[4]);
     pProber->Run();    
     
     return 0;
